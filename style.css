@@ -16,119 +16,144 @@ body {
   color: white;
 
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Poster wrapper */
-/* Poster */
+
+/* =========================
+   POSTER
+   ========================= */
+
 .poster-container {
   position: relative;
 
-  width: 100%;
   height: 100vh;
+  width: fit-content;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 100vw;
+
+  margin: 0 auto;
 
   overflow: hidden;
 }
 
-/* Poster image */
 .poster {
   display: block;
 
-  width: auto;
   height: 100vh;
+  width: auto;
 
-  max-width: 100%;
-  max-height: 100vh;
+  max-width: 100vw;
 
   object-fit: contain;
 }
 
-/* Hidden selectable Morse text */
+
+/* =========================
+   HIDDEN MORSE TEXT
+   ========================= */
+
 .morse-area {
   position: absolute;
+
   color: transparent;
   background: transparent;
+
   user-select: text;
   -webkit-user-select: text;
+
   cursor: text;
+
+  overflow: hidden;
+
+  /* MUCH SMALLER */
+  font-size: 7px;
+  line-height: 1.2;
+
+  letter-spacing: 0;
 }
 
+/* Selection highlight */
 .morse-area::selection {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
   color: transparent;
 }
-  /* IMPORTANT:
-     This allows the text to exist but not visually appear */
-  font-size: 14px;
-  line-height: 1.4;
-}
 
-/* 
-   Adjust these four areas according to your poster.
-   The values are percentages of the poster.
-*/
 
-/* TOP LEFT */
+/* =========================
+   MORSE LOCATIONS
+   ========================= */
+
+/* AREA 1 — upper left */
 .area-1 {
-  left: 5%;
-  top: 5%;
-  width: 35%;
-  height: 20%;
+  left: 8%;
+  top: 18%;
+
+  width: 30%;
+  height: 8%;
 }
 
-/* RIGHT SIDE */
+
+/* AREA 2 — upper right */
 .area-2 {
-  right: 5%;
-  top: 25%;
-  width: 35%;
-  height: 25%;
+  right: 8%;
+  top: 30%;
+
+  width: 32%;
+  height: 10%;
 }
 
-/* BOTTOM LEFT */
+
+/* AREA 3 — middle/lower left */
 .area-3 {
-  left: 5%;
-  bottom: 15%;
-  width: 40%;
-  height: 25%;
+  left: 8%;
+  top: 48%;
+
+  width: 38%;
+  height: 10%;
 }
 
-/* BOTTOM / RIGHT */
+
+/* AREA 4 — lower right,
+   but still ABOVE the dialogue box */
 .area-4 {
-  right: 5%;
-  bottom: 5%;
-  width: 40%;
-  height: 20%;
+  right: 8%;
+  top: 64%;
+
+  width: 38%;
+  height: 10%;
 }
 
 
-/* Decoder */
+/* =========================
+   DECODER / DIALOGUE BOX
+   ========================= */
+
 .decoder {
   position: fixed;
 
   left: 50%;
-  bottom: 20px;
+  bottom: 0;
 
   transform: translateX(-50%);
 
-  width: min(90%, 700px);
+  width: min(700px, 90vw);
 
   padding: 15px;
 
   text-align: center;
 
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.85);
 
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
 
   z-index: 100;
 }
 
 .instruction {
   margin: 0 0 10px;
+
   font-size: 16px;
 }
 
@@ -146,6 +171,39 @@ body {
   word-break: break-word;
 }
 
+#selected-morse {
+  font-size: 11px;
+}
+
 #decoded-message {
   font-size: 18px;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .decoder {
+    width: 94vw;
+    padding: 8px;
+  }
+
+  .instruction {
+    font-size: 12px;
+  }
+
+  #selected-morse {
+    font-size: 9px;
+  }
+
+  #decoded-message {
+    font-size: 14px;
+  }
+
+  .morse-area {
+    font-size: 5px;
+  }
 }
