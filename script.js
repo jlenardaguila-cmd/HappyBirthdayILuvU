@@ -1,11 +1,7 @@
-const morseAreas = document.querySelectorAll(".morse-area");
-
 const selectedMorse = document.getElementById("selected-morse");
 const decodedMessage = document.getElementById("decoded-message");
 
-
-const morseDictionary = {
-
+const morseCode = {
   ".-": "A",
   "-...": "B",
   "-.-.": "C",
@@ -31,40 +27,85 @@ const morseDictionary = {
   ".--": "W",
   "-..-": "X",
   "-.--": "Y",
-  "--..": "Z"
+  "--..": "Z",
 
+  "-----": "0",
+  ".----": "1",
+  "..---": "2",
+  "...--": "3",
+  "....-": "4",
+  ".....": "5",
+  "-....": "6",
+  "--...": "7",
+  "---..": "8",
+  "----.": "9",
+
+  ".-.-.-": ".",
+  "--..--": ",",
+  "..--..": "?",
+  "-.-.--": "!",
+  "-....-": "-",
+  ".----.": "'",
+  "-..-.": "/",
+  ".-..-.": "\"",
+  "---...": ":",
+  "-.-.-.": ";"
 };
 
 
-function decodeMorse(morse) {
+function decodeMorse(text) {
 
-  return morse
-    .trim()
-    .split(" ")
-    .map(code => morseDictionary[code] || "?")
-    .join("");
+  // Separate words
+  const words = text.trim().split(/\s*\/\s*/);
 
+  return words.map(word => {
+
+    // Separate individual Morse letters
+    const letters = word.trim().split(/\s+/);
+
+    return letters.map(letter => {
+
+      return morseCode[letter] || "";
+
+    }).join("");
+
+  }).join(" ");
 }
 
 
-morseAreas.forEach(area => {
+/*
+   Detect when the user selects text
+*/
+document.addEventListener("mouseup", function () {
 
-  area.addEventListener("mouseup", () => {
+  const selection = window.getSelection();
 
-    const selection = window.getSelection();
+  if (!selection || selection.isCollapsed) {
+    return;
+  }
 
-    const selectedText = selection.toString().trim();
+  const text = selection.toString().trim();
 
-    if (selectedText.length === 0) {
-      return;
-    }
+  /*
+     Only react if the selected text
+     came from one of the Morse areas.
+  */
+  const node = selection.anchorNode;
 
-    selectedMorse.textContent = selectedText;
+  if (!node) {
+    return;
+  }
 
-    const decoded = decodeMorse(selectedText);
+  const morseArea = node.parentElement.closest(".morse-area");
 
-    decodedMessage.textContent = decoded;
+  if (!morseArea) {
+    return;
+  }
 
-  });
+  selectedMorse.textContent = text;
+
+  const decoded = decodeMorse(text);
+
+  decodedMessage.textContent = decoded;
 
 });
