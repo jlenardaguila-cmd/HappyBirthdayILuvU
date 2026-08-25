@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.poster-container {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* Hidden Morse code */
+
+.morse-area {
+  position: absolute;
+
+  color: transparent;
+  background: transparent;
+
+  user-select: text;
+  cursor: text;
+
+  font-family: monospace;
+  font-size: 18px;
+  line-height: 1.5;
+
+  z-index: 2;
+}
+
+
+/* 
+   CHANGE THESE POSITIONS
+   TO MATCH YOUR FOUR AREAS
+*/
+
+
+.area-1 {
+  top: 10%;
+  left: 10%;
+  width: 25%;
+}
+
+.area-2 {
+  top: 30%;
+  right: 5%;
+  width: 25%;
+}
+
+.area-3 {
+  bottom: 20%;
+  left: 15%;
+  width: 30%;
+}
+
+.area-4 {
+  bottom: 8%;
+  right: 10%;
+  width: 25%;
+}
+
+
+/* Decoder */
+
+.decoder {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto 80px;
+}
+
+.instruction {
+  font-size: 18px;
+}
+
+#selected-morse {
+  margin-top: 20px;
+  padding: 20px;
+
+  min-height: 30px;
+
+  background: #222;
+  border-radius: 8px;
+
+  font-family: monospace;
+  font-size: 20px;
+}
+
+#decoded-message {
+  margin-top: 20px;
+
+  font-size: 32px;
+  font-weight: bold;
+}
