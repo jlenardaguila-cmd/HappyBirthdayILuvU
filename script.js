@@ -1,6 +1,10 @@
 const selectedMorse = document.getElementById("selected-morse");
 const decodedMessage = document.getElementById("decoded-message");
 
+// ------------------------------------
+// MORSE CODE DICTIONARY
+// ------------------------------------
+
 const morseCode = {
   ".-": "A",
   "-...": "B",
@@ -53,6 +57,10 @@ const morseCode = {
 };
 
 
+// ------------------------------------
+// DECODE MORSE CODE
+// ------------------------------------
+
 function decodeMorse(text) {
 
   // Separate words
@@ -73,39 +81,96 @@ function decodeMorse(text) {
 }
 
 
-/*
-   Detect when the user selects text
-*/
+// ------------------------------------
+// RESET DIALOGUE
+// ------------------------------------
+
+function resetDialogue() {
+
+  selectedMorse.textContent = "Select the Morse code";
+
+  decodedMessage.textContent = "Your decoded message will appear here.";
+
+}
+
+
+// ------------------------------------
+// DETECT TEXT SELECTION
+// ------------------------------------
+
 document.addEventListener("mouseup", function () {
 
   const selection = window.getSelection();
 
+  // Nothing is selected
   if (!selection || selection.isCollapsed) {
+    resetDialogue();
     return;
   }
 
   const text = selection.toString().trim();
 
-  /*
-     Only react if the selected text
-     came from one of the Morse areas.
-  */
+  // Selection contains no text
+  if (!text) {
+    resetDialogue();
+    return;
+  }
+
+
+  // ------------------------------------
+  // CHECK IF SELECTION IS INSIDE
+  // A MORSE AREA
+  // ------------------------------------
+
   const node = selection.anchorNode;
 
   if (!node) {
+    resetDialogue();
     return;
   }
 
-  const morseArea = node.parentElement.closest(".morse-area");
+  const element =
+    node.nodeType === Node.TEXT_NODE
+      ? node.parentElement
+      : node;
 
+  const morseArea = element.closest(".morse-area");
+
+  // Selection is outside a Morse area
   if (!morseArea) {
+    resetDialogue();
     return;
   }
+
+
+  // ------------------------------------
+  // DISPLAY SELECTED MORSE
+  // ------------------------------------
 
   selectedMorse.textContent = text;
+
+
+  // ------------------------------------
+  // DECODE MORSE
+  // ------------------------------------
 
   const decoded = decodeMorse(text);
 
   decodedMessage.textContent = decoded;
+
+});
+
+
+// ------------------------------------
+// DETECT WHEN SELECTION IS CLEARED
+// ------------------------------------
+
+document.addEventListener("selectionchange", function () {
+
+  const selection = window.getSelection();
+
+  if (!selection || selection.isCollapsed) {
+    resetDialogue();
+  }
 
 });
