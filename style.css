@@ -26,17 +26,17 @@ body {
 /* Hidden selectable Morse text */
 .morse-area {
   position: absolute;
-
   color: transparent;
   background: transparent;
-
   user-select: text;
   -webkit-user-select: text;
-
   cursor: text;
+}
 
-  overflow: hidden;
-
+.morse-area::selection {
+  background: rgba(255, 255, 255, 0.5);
+  color: transparent;
+}
   /* IMPORTANT:
      This allows the text to exist but not visually appear */
   font-size: 14px;
