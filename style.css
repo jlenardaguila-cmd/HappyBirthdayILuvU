@@ -1,27 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background: #111;
-  color: white;
   font-family: Arial, sans-serif;
-  text-align: center;
+  color: white;
 }
 
+/* Poster wrapper */
 .poster-container {
   position: relative;
-  width: 90%;
-  max-width: 1200px;
+  width: min(100%, 1200px);
   margin: 40px auto;
 }
 
+/* Poster image */
 .poster {
   display: block;
   width: 100%;
   height: auto;
 }
 
-
-/* Hidden Morse code */
-
+/* Hidden selectable Morse text */
 .morse-area {
   position: absolute;
 
@@ -29,75 +31,80 @@ body {
   background: transparent;
 
   user-select: text;
+  -webkit-user-select: text;
+
   cursor: text;
 
-  font-family: monospace;
-  font-size: 18px;
-  line-height: 1.5;
+  overflow: hidden;
 
-  z-index: 2;
+  /* IMPORTANT:
+     This allows the text to exist but not visually appear */
+  font-size: 14px;
+  line-height: 1.4;
 }
-
 
 /* 
-   CHANGE THESE POSITIONS
-   TO MATCH YOUR FOUR AREAS
+   Adjust these four areas according to your poster.
+   The values are percentages of the poster.
 */
 
-
+/* TOP LEFT */
 .area-1 {
-  top: 10%;
-  left: 10%;
-  width: 25%;
+  left: 5%;
+  top: 5%;
+  width: 35%;
+  height: 20%;
 }
 
+/* RIGHT SIDE */
 .area-2 {
-  top: 30%;
   right: 5%;
-  width: 25%;
+  top: 25%;
+  width: 35%;
+  height: 25%;
 }
 
+/* BOTTOM LEFT */
 .area-3 {
-  bottom: 20%;
-  left: 15%;
-  width: 30%;
+  left: 5%;
+  bottom: 15%;
+  width: 40%;
+  height: 25%;
 }
 
+/* BOTTOM / RIGHT */
 .area-4 {
-  bottom: 8%;
-  right: 10%;
-  width: 25%;
+  right: 5%;
+  bottom: 5%;
+  width: 40%;
+  height: 20%;
 }
 
 
 /* Decoder */
-
 .decoder {
-  width: 90%;
-  max-width: 800px;
+  width: min(90%, 800px);
   margin: 40px auto 80px;
+  text-align: center;
 }
 
 .instruction {
   font-size: 18px;
+  margin-bottom: 20px;
 }
 
-#selected-morse {
-  margin-top: 20px;
-  padding: 20px;
-
-  min-height: 30px;
+#selected-morse,
+#decoded-message {
+  min-height: 50px;
+  margin: 15px 0;
+  padding: 15px;
 
   background: #222;
   border-radius: 8px;
 
-  font-family: monospace;
-  font-size: 20px;
+  word-break: break-word;
 }
 
 #decoded-message {
-  margin-top: 20px;
-
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 20px;
 }
